@@ -87,6 +87,7 @@ main{max-width:640px;margin:0 auto;padding:16px 16px 40px}
 .note .txt.struck,.todo .struck{text-decoration:line-through}
 .note li.imp .txt::before{content:"★ ";color:var(--accent)}
 .note .chk-head small{font-size:12px}
+.note .shared-tag{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:0 4px;vertical-align:1px;text-decoration:none}
 .note .done-row{display:flex;align-items:center;gap:10px;margin:10px 0;padding:10px 12px;border-radius:8px;background:var(--surface);border:1.5px dashed var(--line);cursor:pointer;font-weight:700}
 .note .done-row input{flex:none;width:24px;height:24px;margin:0;accent-color:var(--accent)}
 .note .done-row.on{border-style:solid;border-color:var(--accent)}
@@ -764,6 +765,7 @@ const CONFIG = {
   const ITEM_RE = /^(\s*(?:[-*・]\s*)?)\[\s*([xXvV✓✔]?)\s*\]\s*(.*)$/;
   const MUST_RE = /^\s*\[!\]\s*(.+)$/;     // [!] 必看重點
   const DONE_RE = /^\s*\[\s*完成\s*\]\s*(.*)$/;  // [完成] 標記整個流程項目完成
+  const SHARED_RE = /^(\s*(?:[-*・]\s*)?)\[\s*共\s*\]\s*(.*)$/;  // [共] 同一流程項目的所有人共用一個勾選
   const BUL_RE = /^\s*-\s+(.+)$/;           // - 條列項目
   const mustKey = (taskKey, t, n) => `must:${SRC}:${taskKey}|${t}${n > 1 ? '#' + n : ''}`;
   const plainOf = t => t.replace(/`([^`]+)`/g,'$1').replace(/~~([^~]+?)~~/g,'$1').replace(/\*\*((?:[^*]|\*(?!\*))+?)\*\*/g,'$1').replace(/\*([^*\s](?:[^*]*?[^*\s])?)\*/g,'$1').replace(/__([^_]+?)__/g,'$1').replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,'$1').trim();
@@ -893,7 +895,8 @@ const CONFIG = {
         }
         const mu = line.match(MUST_RE);
         if (mu){ ul = null; bl = null; container.append(mustRow(mu[1].trim())); return; }
-        const m = line.match(ITEM_RE);
+        const sh = line.match(SHARED_RE);
+        const m = line.match(ITEM_RE) || (sh ? [line, sh[1], '', sh[2]] : null);
         const bm = !m && line.match(BUL_RE);
         if (bm){
           ul = null;
@@ -912,12 +915,15 @@ const CONFIG = {
           bl = null;
           if (!ul){ ul = el('ul'); container.append(ul); }
           const text = m[3].trim(); seen[text] = (seen[text] || 0) + 1;
-          const key = apiUrl ? `${taskKey}|${text}${seen[text] > 1 ? '#' + seen[text] : ''}` : `chk:${SRC}:${taskKey}|${text}${seen[text] > 1 ? '#' + seen[text] : ''}`;
+          // [共]：鍵值不含人名，同一時段同一任務的所有人看到同一個勾選
+          const baseKey = (sh && meta && meta.staff) ? `共|${meta.start}|${meta.title}` : taskKey;
+          const key = apiUrl ? `${baseKey}|${text}${seen[text] > 1 ? '#' + seen[text] : ''}` : `chk:${SRC}:${baseKey}|${text}${seen[text] > 1 ? '#' + seen[text] : ''}`;
           const def = !!m[2];
           const st = checkState(key, def);
           const li = el('li'); const lab = el('label'); const cb = el('input');
           cb.type = 'checkbox'; cb.checked = st.done; cb.setAttribute('aria-label', plainOf(text));
           const span = el('span','txt'); richText(span, text);
+          if (sh) span.append(el('span','shared-tag','共用'));
           span.classList.toggle('struck', store.get('strike:' + key) === '1');
           const who = el('small'); who.style.cssText = 'display:block;font-size:12px;color:var(--muted);text-decoration:none';
           const setWho = s => { who.textContent = (s.done && s.by) ? `${s.by} 完成${s.at ? '・' + String(s.at).slice(-5) : ''}` : ''; };
