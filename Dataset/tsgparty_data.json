@@ -1,7 +1,7 @@
 {
  "format": "event-flow",
  "version": 1,
- "exportedAt": "2026-11-06T17:26:56.061Z",
+ "exportedAt": "2026-11-06T23:49:58.574Z",
  "raw": {
   "settings": [
    {
@@ -389,7 +389,7 @@
     "結束": "18:00",
     "事項": "綠白趣味對抗賽",
     "地點": "澄清湖棒球場",
-    "備註": "**台鋼綠 vs. 雄鷹白**\n三局制樂樂棒球趣味競賽，由選手和 Wing Stars 組隊出賽\n※ 天候不佳時，主辦單位可能調整場地，請留意現場公告\n・鷹TV 提供轉播\n\n[完成] 我不想看見這則活動啾～",
+    "備註": "**台鋼綠 vs. 雄鷹白**\n三局制樂樂棒球趣味競賽，由選手和 Wing Stars 組隊出賽\n※ 天候不佳時，主辦單位可能調整場地，請留意現場公告\n・鷹TV 提供轉播\n・16:00 前可在 App 參加預測勝負\n\n[完成] 我不想看見這則活動啾～",
     "連結": "https://www.facebook.com/TSGHAWKS/posts/pfbid07xjnCuixGAC8LsZWdctBeFLjKMCMUfSM7UjowqG2tH6WnQt49qFLgV4NMTZ8fJ5tl",
     "": ""
    },
@@ -464,6 +464,15 @@
     "地點": "各入口",
     "內容": "每張有價票券限領一次，限量發放，送完為止\n[ ] 有鷹來同樂紀念飄帶 1 個\n[ ] 19號喬伊鮮乳 X 台鋼雄鷹 聯名 TAKAO 白脫蛋白飲 1 瓶\n[ ] 同樂刮刮卡 1 張（鷹為你值得攤位兌獎）\n[ ] 乖乖聯名餅乾 2 包（口味隨機）\n[ ] 立頓氣泡茶 1 瓶（口味隨機）\n[!] 進場時**__請當場確認__**贈品數量與狀況，入場後不補發、不換發",
     "連結": "入場贈品|https://scontent-sin6-3.xx.fbcdn.net/v/t39.99422-6/878022499_1457675662958881_162947954771402052_n.png?stp=dst-jpg_tt6&cstp=mx2048x2048&ctp=s2048x2048&_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=2xQuSkl_aYkQ7kNvwFOUZsr&_nc_oc=AdpxSd2mZ3vmMRtFi-9wUHlTb9VqT01YM9U3XN1F7Az2U3FfZXc8NH4_WkDHYprmems&_nc_zt=14&_nc_ht=scontent-sin6-3.xx&_nc_gid=TRCIuUW5WFwTgNsBOA-KNQ&_nc_ss=7b2a8&oh=00_AQQwEaJJ3OoKb94e5L7PpVvr_pgNXheACDaa-POP2lboMw&oe=6AF3C928\n刮刮卡兌換資訊|https://github.com/jagonball/2026_Academic_timetable_APP/blob/main/Dataset/scratch.jpg?raw=true",
+    "": ""
+   },
+   {
+    "分類": "會員專屬",
+    "標題": "App 打卡任務＋預測勝負",
+    "時間": "11/7 進場後～16:00",
+    "地點": "澄清湖棒球場",
+    "內容": "[!] 進到澄清湖球場後，完成 **App 打卡任務**，可獲得特殊獎勵點數 **3 點**\n[!] **16:00 前**參加樂樂棒趣味賽預測勝負：台鋼綠 vs. 雄鷹白，你看好哪一隊？",
+    "連結": "",
     "": ""
    },
    {
